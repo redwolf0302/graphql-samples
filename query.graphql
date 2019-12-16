@@ -4,3 +4,14 @@ query {
     dept
   }
 }
+"""
+Gender枚举
+"""
+enum Gender {
+  "未知性别"
+  UNKNOWN
+  "男性"
+  MALE
+  "女性"
+  FEMALE
+}
