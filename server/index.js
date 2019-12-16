@@ -48,7 +48,6 @@ function server(port = 8080) {
   app.use("/hospital", require("./hospital/router"));
   app.use("/doctor", require("./doctor/router"));
   app.use("/department", require("./department/router"));
-  app.use("/patient", require("./patient/router"));
 
   // =======================
   // 注册 GraphQL Schema
