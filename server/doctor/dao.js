@@ -14,9 +14,11 @@ function doctorsByHospitalId(hospitalId) {
     .prepare("select * from doctor where hospital_id=?")
     .all(hospitalId);
 }
+
 function doctorsByDeptId(deptId) {
   return database.prepare("select * from doctor where dept_id=?").all(deptId);
 }
+
 module.exports = {
   doctors,
   doctorsByHospitalId,
