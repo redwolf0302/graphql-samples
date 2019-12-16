@@ -1,0 +1,6 @@
+query {
+  doctor(doctorId: 100) {
+    name
+    dept
+  }
+}

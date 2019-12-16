@@ -1,0 +1,31 @@
+{
+  "name": "graphql-samples",
+  "version": "1.0.0",
+  "description": "GraphQL Samples",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redwolf0302/graphql-samples.git"
+  },
+  "keywords": [
+    "graphql",
+    "samples"
+  ],
+  "author": "EvanZhang <redwolf0302@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/redwolf0302/graphql-samples/issues"
+  },
+  "homepage": "https://github.com/redwolf0302/graphql-samples#readme",
+  "dependencies": {
+    "apollo-server": "^2.9.12",
+    "apollo-server-express": "^2.9.13",
+    "better-sqlite3": "^5.4.3",
+    "express": "^4.17.1",
+    "graphql": "^14.5.8"
+  }
+}
