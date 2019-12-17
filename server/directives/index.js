@@ -1,4 +1,5 @@
 module.exports = {
   fetch: require("./FetchDirective"),
-  dto: require("./DtoDirective")
+  dto: require("./DtoDirective"),
+  api: require("./ApiDirective")
 };

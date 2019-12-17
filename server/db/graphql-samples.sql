@@ -1,14 +1,14 @@
 -- =============================
 -- 创建表结构
 -- =============================
--- DROP INDEX "idx_mobile";
+DROP INDEX "idx_mobile";
 
--- DROP TABLE "doctor";
--- DROP TABLE "department";
--- DROP TABLE "hospital";
--- DROP TABLE "staff";
--- DROP TABLE "doctor_patient_mapping";
--- DROP TABLE "patient";
+DROP TABLE "doctor";
+DROP TABLE "department";
+DROP TABLE "hospital";
+DROP TABLE "staff";
+DROP TABLE "doctor_patient_mapping";
+DROP TABLE "patient";
 
 CREATE TABLE "doctor"
 (
@@ -49,6 +49,7 @@ CREATE TABLE "staff"
     "staff_name" TEXT NOT NULL,
     "mobile" TEXT NOT NULL,
     "role" TEXT DEFAULT STAFF,
+    "created_at" TEXT NOT NULL,
     PRIMARY KEY ("id")
 );
 CREATE UNIQUE INDEX "idx_mobile" ON "staff" ("mobile" ASC);
@@ -142,5 +143,5 @@ VALUES
 INSERT INTO "staff"
     ("id","staff_name","mobile","role")
 VALUES
-    (1, "张大辉", "13801800500", "ADMIN"),
-    (2, "张小辉", "13801800501", "STAFF");
+    (1, "张大辉", "13801800500", "ADMIN", "2019-01-12 08:23:15"),
+    (2, "张小辉", "13801800501", "STAFF", "2019-11-24 10:39:17");

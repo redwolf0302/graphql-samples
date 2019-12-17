@@ -14,6 +14,7 @@ module.exports = {
       }
       return doctorDao.doctors();
     },
+    // async findDoctors(parent, args, context, info) {},
     findHospitals(parent, args, context, info) {
       return hospitalDao.hospitals();
     },
@@ -24,7 +25,7 @@ module.exports = {
     findPatient(parent, args, context, info) {
       const { patientId } = args;
       return patientDao.patientById(patientId);
-    }
+    },
   },
   Doctor: {
     hospital(doctor) {
@@ -35,7 +36,7 @@ module.exports = {
     },
     patients(doctor) {
       return patientDao.patientsByDoctorId(doctor.doctor_id);
-    }
+    },
   },
   Hospital: {
     doctors(hospital) {
@@ -43,16 +44,16 @@ module.exports = {
     },
     departments(hospital) {
       return departmentDao.departmentsByHospitalId(hospital.id);
-    }
+    },
   },
   Department: {
     doctors(department) {
       return doctorDao.doctorsByDeptId(department.dept_id);
-    }
+    },
   },
   Patient: {
     doctors(patient) {
       return patientDao.doctorsByPatientId(patient.patient_id);
-    }
-  }
+    },
+  },
 };

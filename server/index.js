@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const typeDefs = require("./schemas/hospital_schema");
 const resolvers = require("./schemas/hospital_resolvers");
-const directives = require("./directives");
+const schemaDirectives = require("./directives");
 /**
  * server
  * @param {*} port
@@ -12,19 +12,32 @@ function server(port = 8080) {
   // =======================
   // 注册 Rest API
   // =======================
-  app.use("/patient", require("./patient/router"));
-  app.use("/hospital", require("./hospital/router"));
-  app.use("/doctor", require("./doctor/router"));
-  app.use("/department", require("./department/router"));
+  app.use("/api", require("./api_router"));
 
   // =======================
   // 注册 GraphQL Schema
   // =======================
-
   const server = new ApolloServer({
     typeDefs,
-    resolvers,
-    schemaDirectives: directives
+    resolvers: Object.assign(
+      {
+        Gender: {
+          UNKNOWN: 0,
+          MALE: 1,
+          FEMALE: 2,
+        },
+      },
+      resolvers
+    ),
+    schemaDirectives,
+    // formatError: error => {
+    //   console.log(error);
+    //   return error;
+    // },
+    // formatResponse: response => {
+    //   console.log(response);
+    //   return response;
+    // }
   });
   server.applyMiddleware({ app });
 
@@ -32,9 +45,7 @@ function server(port = 8080) {
   // 启动服务器
   // =======================
   app.listen(port, () => {
-    console.log(
-      `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`
-    );
+    console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`);
   });
 }
 
