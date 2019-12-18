@@ -2,6 +2,7 @@ const doctorDao = require("../doctor/dao");
 const hospitalDao = require("../hospital/dao");
 const departmentDao = require("../department/dao");
 const patientDao = require("../patient/dao");
+const fetch = require("node-fetch");
 module.exports = {
   Query: {
     // https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature
@@ -34,6 +35,11 @@ module.exports = {
     department(doctor) {
       return departmentDao.departmentById(doctor.dept_id);
     },
+    // async department(doctor) {
+    //   return fetch(`http://localhost:8080/api/department/${doctor.dept_id}`, { method: "GET" }).then(response =>
+    //     response.json()
+    //   );
+    // },
     patients(doctor) {
       return patientDao.patientsByDoctorId(doctor.doctor_id);
     },

@@ -14,7 +14,9 @@ module.exports = gql`
   @dto 格式化数据库字段名称 doctorName 改为 doctor_name
   """
   directive @dto on OBJECT | FIELD_DEFINITION
-
+  """
+  @api API调用，url设置需要抓取的Rest API地址，参数可以使用{{var}}引用
+  """
   directive @api(url: String) on FIELD_DEFINITION
   # https://graphql.github.io/graphql-spec/June2018/#SchemaDefinition
   schema {
@@ -26,11 +28,11 @@ module.exports = gql`
     "查询医生列表"
     findDoctors("科室ID" deptId: Int, "医院ID" hospitalId: Int): [Doctor]
     "查询指定患者"
-    findPatient(patientId: Int!): Patient
+    findPatient("患者ID" patientId: Int!): Patient
     "医院列表"
     findHospitals: [Hospital]
     "查询指定医院的科室列表"
-    findDepartments(hospitalId: Int!): [Department]
+    findDepartments("医院ID" hospitalId: Int!): [Department]
   }
   """
   Doctor模型
