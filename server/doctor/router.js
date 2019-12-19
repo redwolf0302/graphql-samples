@@ -12,7 +12,7 @@ router.get("/:id(\\d+)", (req, res) => {
 router.get("/hospital/:hospitalId(\\d+)", (req, res) => {
   res.json(dao.doctorsByHospitalId(req.params.hospitalId));
 });
-router.get("/deparment/:deptId(\\d+)", (req, res) => {
+router.get("/department/:deptId(\\d+)", (req, res) => {
   res.json(dao.doctorsByDeptId(req.params.deptId));
 });
 module.exports = router;

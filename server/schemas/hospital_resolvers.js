@@ -31,7 +31,15 @@ module.exports = {
       }
       return doctorDao.doctors();
     },
-    // async findDoctors(parent, args, context, info) {},
+    // async findDoctors(parent, args, context, info) {
+    //   const { deptId, hospitalId } = args;
+    //   if (deptId) {
+    //     return fetch(`http://localhost:8080/api/doctor/department/${deptId}`).then(response => response.json());
+    //   } else if (hospitalId) {
+    //     return fetch(`http://localhost:8080/api/doctor/hospital/${hospitalId}`).then(response => response.json());
+    //   }
+    //   return fetch(`http://localhost:8080/api/doctor/list`).then(response => response.json());
+    // },
     findHospitals(parent, args, context, info) {
       return hospitalDao.hospitals();
     },
