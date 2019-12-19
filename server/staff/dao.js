@@ -13,8 +13,15 @@ function staffByMobile(mobile) {
   return database.prepare("SELECT * FROM staff WHERE mobile=?").get(mobile);
 }
 
+function insertStaff(staff) {
+  const stmt = database.prepare('INSERT INTO staff("staff_name", "mobile", "role", "created_at")VALUES(?,?,?,?)');
+  const result = stmt.run([staff.staff_name, staff.mobile, staff.role, staff.created_at]);
+  console.log(result);
+}
+
 module.exports = {
   staffs,
   staffById,
   staffByMobile,
+  insertStaff,
 };

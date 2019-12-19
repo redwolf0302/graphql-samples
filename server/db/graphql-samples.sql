@@ -43,14 +43,12 @@ CREATE TABLE "hospital"
     "address" TEXT,
     PRIMARY KEY ("id")
 );
-CREATE TABLE "staff"
-(
-    "id" INTEGER NOT NULL,
-    "staff_name" TEXT NOT NULL,
-    "mobile" TEXT NOT NULL,
-    "role" TEXT DEFAULT STAFF,
-    "created_at" TEXT NOT NULL,
-    PRIMARY KEY ("id")
+CREATE TABLE "staff" (
+"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"staff_name" TEXT NOT NULL,
+"mobile" TEXT NOT NULL,
+"role" TEXT DEFAULT STAFF,
+"created_at" TEXT
 );
 CREATE UNIQUE INDEX "idx_mobile" ON "staff" ("mobile" ASC);
 
@@ -141,7 +139,7 @@ VALUES
     (4, 4);
 
 INSERT INTO "staff"
-    ("id","staff_name","mobile","role", "created_at")
+    ("staff_name","mobile","role", "created_at")
 VALUES
-    (1, "张大辉", "13801800500", "ADMIN", "2019-01-12 08:23:15"),
-    (2, "张小辉", "13801800501", "STAFF", "2019-11-24 10:39:17");
+    ("张大辉", "13801800500", "ADMIN", "2019-01-12 08:23:15"),
+    ("张小辉", "13801800501", "STAFF", "2019-11-24 10:39:17");

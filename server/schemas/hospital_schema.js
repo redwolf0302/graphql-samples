@@ -4,7 +4,6 @@ const { gql } = require("apollo-server-express");
 // =======================
 module.exports = gql`
   # https://graphql.github.io/graphql-spec/June2018/#sec-Type-System.Directives
-
   """
   @fetch 字段抓取指令
   """
@@ -26,8 +25,12 @@ module.exports = gql`
   schema {
     # https://graphql.github.io/graphql-spec/June2018/#RootOperationTypeDefinition
     query: Query
+    mutation: Mutation
   }
-
+  # https://www.apollographql.com/docs/apollo-server/schema/schema/#designing-mutations
+  type Mutation {
+    addStaff(staffName: String!, mobile: String!, role: String, createdAt: Date): Staff
+  }
   type Query {
     "查询医生列表"
     findDoctors("科室ID" deptId: Int, "医院ID" hospitalId: Int): [Doctor]

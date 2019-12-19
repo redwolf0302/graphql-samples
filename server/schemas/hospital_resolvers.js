@@ -5,6 +5,9 @@ const patientDao = require("../patient/dao");
 const staffDao = require("../staff/dao");
 const fetch = require("node-fetch");
 module.exports = {
+  Mutation: {
+    addStaff(parent, args, context, info) {},
+  },
   Query: {
     // https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature
     findDoctors(parent, args, context, info) {
