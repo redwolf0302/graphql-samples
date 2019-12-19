@@ -1,0 +1,20 @@
+const Database = require("better-sqlite3");
+const { DATABASE_PATH } = require("../settings");
+const database = new Database(DATABASE_PATH);
+function staffs() {
+  return database.prepare("select * from staff").all();
+}
+
+function staffById(id) {
+  return database.prepare("SELECT * FROM staff WHERE id=?").get(id);
+}
+
+function staffByMobile(mobile) {
+  return database.prepare("SELECT * FROM staff WHERE mobile=?").get(mobile);
+}
+
+module.exports = {
+  staffs,
+  staffById,
+  staffByMobile,
+};

@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const typeDefs = require("./schemas/hospital_schema");
 const resolvers = require("./schemas/hospital_resolvers");
+const scalars = require("./scalars");
 const schemaDirectives = require("./directives");
 /**
  * server
@@ -27,6 +28,7 @@ function server(port = 8080) {
           FEMALE: 2,
         },
       },
+      scalars,
       resolvers
     ),
     schemaDirectives,

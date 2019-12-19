@@ -18,6 +18,10 @@ module.exports = gql`
   @api API调用，url设置需要抓取的Rest API地址，参数可以使用{{var}}引用
   """
   directive @api(url: String) on FIELD_DEFINITION
+
+  # https://graphql.github.io/graphql-spec/June2018/#sec-Scalars
+  scalar Date
+
   # https://graphql.github.io/graphql-spec/June2018/#SchemaDefinition
   schema {
     # https://graphql.github.io/graphql-spec/June2018/#RootOperationTypeDefinition
@@ -33,6 +37,8 @@ module.exports = gql`
     findHospitals: [Hospital]
     "查询指定医院的科室列表"
     findDepartments("医院ID" hospitalId: Int!): [Department]
+    "查询员工信息"
+    getStaff("手机号码" mobile: String): Staff
   }
   """
   Doctor模型
@@ -82,6 +88,14 @@ module.exports = gql`
     patientName: String @dto
     gender: Gender #@dto
     doctors: [Doctor]
+  }
+
+  type Staff {
+    staffId: Int @fetch(from: "id")
+    staffName: String @dto
+    mobile: String @dto
+    role: String @dto
+    created_at: Date
   }
   """
   Gender枚举

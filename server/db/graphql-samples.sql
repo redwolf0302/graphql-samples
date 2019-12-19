@@ -141,7 +141,7 @@ VALUES
     (4, 4);
 
 INSERT INTO "staff"
-    ("id","staff_name","mobile","role")
+    ("id","staff_name","mobile","role", "created_at")
 VALUES
     (1, "张大辉", "13801800500", "ADMIN", "2019-01-12 08:23:15"),
     (2, "张小辉", "13801800501", "STAFF", "2019-11-24 10:39:17");

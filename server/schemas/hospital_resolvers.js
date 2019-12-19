@@ -2,6 +2,7 @@ const doctorDao = require("../doctor/dao");
 const hospitalDao = require("../hospital/dao");
 const departmentDao = require("../department/dao");
 const patientDao = require("../patient/dao");
+const staffDao = require("../staff/dao");
 const fetch = require("node-fetch");
 module.exports = {
   Query: {
@@ -26,6 +27,10 @@ module.exports = {
     findPatient(parent, args, context, info) {
       const { patientId } = args;
       return patientDao.patientById(patientId);
+    },
+    getStaff(parent, args, context, info) {
+      const { mobile } = args;
+      return staffDao.staffByMobile(mobile);
     },
   },
   Doctor: {
