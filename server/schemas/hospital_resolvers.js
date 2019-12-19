@@ -4,9 +4,21 @@ const departmentDao = require("../department/dao");
 const patientDao = require("../patient/dao");
 const staffDao = require("../staff/dao");
 const fetch = require("node-fetch");
+const moment = require("moment");
 module.exports = {
   Mutation: {
-    addStaff(parent, args, context, info) {},
+    addStaff(parent, args, context, info) {
+      const { staffName, mobile, role, createdAt } = args;
+      const staffId = staffDao.insertStaff({ staff_name: staffName, mobile, role, created_at: createdAt });
+      return staffDao.staffById(staffId);
+    },
+    // addStaff(parent, args, context, info) {
+    //   const {
+    //     input: { staffName, mobile, role, createdAt },
+    //   } = args;
+    //   const staffId = staffDao.insertStaff({ staff_name: staffName, mobile, role, created_at: createdAt });
+    //   return staffDao.staffById(staffId);
+    // },
   },
   Query: {
     // https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature
@@ -34,6 +46,16 @@ module.exports = {
     getStaff(parent, args, context, info) {
       const { mobile } = args;
       return staffDao.staffByMobile(mobile);
+    },
+    findHuman(parent, args, context, info) {
+      let doctors = doctorDao.doctors();
+      let patients = patientDao.patients();
+      let staffs = staffDao.staffs();
+      let human = []
+        .concat(doctors)
+        .concat(patients)
+        .concat(staffs);
+      return human;
     },
   },
   Doctor: {
@@ -68,6 +90,42 @@ module.exports = {
   Patient: {
     doctors(patient) {
       return patientDao.doctorsByPatientId(patient.patient_id);
+    },
+  },
+  Human: {
+    // https://www.apollographql.com/docs/apollo-server/schema/unions-interfaces/
+    __resolveType(obj, context, info) {
+      if ("doctor_name" in obj) {
+        return "Doctor";
+      }
+
+      if ("staff_name" in obj) {
+        return "Staff";
+      }
+
+      if ("patient_name" in obj) {
+        return "Patient";
+      }
+
+      return null;
+    },
+  },
+  IHuman: {
+    // https://www.apollographql.com/docs/apollo-server/schema/unions-interfaces/
+    __resolveType(obj, context, info) {
+      if ("doctor_name" in obj) {
+        return "Doctor";
+      }
+
+      if ("staff_name" in obj) {
+        return "Staff";
+      }
+
+      if ("patient_name" in obj) {
+        return "Patient";
+      }
+
+      return null;
     },
   },
 };

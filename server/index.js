@@ -32,14 +32,17 @@ function server(port = 8080) {
       resolvers
     ),
     schemaDirectives,
-    // formatError: error => {
-    //   console.log(error);
-    //   return error;
-    // },
-    // formatResponse: response => {
-    //   console.log(response);
-    //   return response;
-    // }
+    tracing: true,
+    /*
+    formatError: error => {
+      console.log(error);
+      return error;
+    },
+    formatResponse: response => {
+      console.log(response);
+      return response;
+    }
+    */
   });
   server.applyMiddleware({ app });
 

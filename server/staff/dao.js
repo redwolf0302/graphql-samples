@@ -15,8 +15,8 @@ function staffByMobile(mobile) {
 
 function insertStaff(staff) {
   const stmt = database.prepare('INSERT INTO staff("staff_name", "mobile", "role", "created_at")VALUES(?,?,?,?)');
-  const result = stmt.run([staff.staff_name, staff.mobile, staff.role, staff.created_at]);
-  console.log(result);
+  const { lastInsertRowid } = stmt.run([staff.staff_name, staff.mobile, staff.role, staff.created_at]);
+  return lastInsertRowid;
 }
 
 module.exports = {
