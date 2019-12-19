@@ -27,6 +27,7 @@ module.exports = gql`
     # https://graphql.github.io/graphql-spec/June2018/#RootOperationTypeDefinition
     query: Query
     mutation: Mutation
+    subscription: Subscription
   }
   # https://graphql.github.io/graphql-spec/June2018/#sec-Input-Objects
   input StaffParams {
@@ -35,6 +36,11 @@ module.exports = gql`
     role: String
     createdAt: Date
   }
+  # https://www.apollographql.com/docs/apollo-server/data/subscriptions/#subscriptions-example
+  type Subscription {
+    staffAdded: Staff
+  }
+
   # https://www.apollographql.com/docs/apollo-server/schema/schema/#designing-mutations
   type Mutation {
     addStaff(staffName: String!, mobile: String!, role: String, createdAt: Date): Staff

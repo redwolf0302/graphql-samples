@@ -1,23 +1,36 @@
+const { PubSub } = require("apollo-server");
+const fetch = require("node-fetch");
+
 const doctorDao = require("../doctor/dao");
 const hospitalDao = require("../hospital/dao");
 const departmentDao = require("../department/dao");
 const patientDao = require("../patient/dao");
 const staffDao = require("../staff/dao");
-const fetch = require("node-fetch");
-const moment = require("moment");
+
+const pubsub = new PubSub();
+
 module.exports = {
+  Subscription: {
+    staffAdded: {
+      subscribe: () => pubsub.asyncIterator(["STAFF_ADD"]),
+    },
+  },
   Mutation: {
     addStaff(parent, args, context, info) {
       const { staffName, mobile, role, createdAt } = args;
       const staffId = staffDao.insertStaff({ staff_name: staffName, mobile, role, created_at: createdAt });
-      return staffDao.staffById(staffId);
+      const newStaff = staffDao.staffById(staffId);
+      pubsub.publish("STAFF_ADD", { staffAdded: newStaff });
+      return newStaff;
     },
     // addStaff(parent, args, context, info) {
     //   const {
     //     input: { staffName, mobile, role, createdAt },
     //   } = args;
     //   const staffId = staffDao.insertStaff({ staff_name: staffName, mobile, role, created_at: createdAt });
-    //   return staffDao.staffById(staffId);
+    //   const newStaff = staffDao.staffById(staffId);
+    //   pubsub.publish("STAFF_ADD", { staffAdded: newStaff });
+    //   return newStaff;
     // },
   },
   Query: {

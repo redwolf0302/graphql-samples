@@ -1,3 +1,4 @@
+const http = require("http");
 const { ApolloServer } = require("apollo-server-express");
 const express = require("express");
 const app = express();
@@ -32,6 +33,13 @@ function server(port = 8080) {
       resolvers
     ),
     schemaDirectives,
+    // https://www.apollographql.com/docs/apollo-server/data/subscriptions/#lifecycle-events
+    subscriptions: {
+      onConnect(connectionParams, webSocket, context) {
+        return Promise.resolve();
+      },
+      onDisconnect(webSocket, context) {},
+    },
     tracing: true,
     /*
     formatError: error => {
@@ -46,11 +54,15 @@ function server(port = 8080) {
   });
   server.applyMiddleware({ app });
 
+  const httpServer = http.createServer(app);
+  server.installSubscriptionHandlers(httpServer);
+
   // =======================
   // 启动服务器
   // =======================
-  app.listen(port, () => {
+  httpServer.listen(port, () => {
     console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`);
+    console.log(`🚀 Subscriptions ready at ws://localhost:${port}${server.subscriptionsPath}`);
   });
 }
 
