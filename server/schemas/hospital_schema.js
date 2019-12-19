@@ -53,6 +53,8 @@ module.exports = gql`
     findDepartments("医院ID" hospitalId: Int!): [Department]
     "查询员工信息"
     getStaff("手机号码" mobile: String): Staff
+    "查询员工列表"
+    staffs: [Staff]
     "查询人类"
     findHuman: [Human] # [IHuman]
   }

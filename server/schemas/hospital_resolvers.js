@@ -47,6 +47,9 @@ module.exports = {
       const { mobile } = args;
       return staffDao.staffByMobile(mobile);
     },
+    staffs(parent, args, context, info) {
+      return staffDao.staffs();
+    },
     findHuman(parent, args, context, info) {
       let doctors = doctorDao.doctors();
       let patients = patientDao.patients();
