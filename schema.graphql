@@ -169,6 +169,10 @@ type Staff {
   created_at: Date
 }
 
+extend type Staff {
+  staff_name: String
+}
+
 # """
 # Staff模型
 # """

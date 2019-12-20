@@ -10,6 +10,7 @@ const staffDao = require("../staff/dao");
 const pubsub = new PubSub();
 
 module.exports = {
+  // https://www.apollographql.com/docs/apollo-server/data/subscriptions/
   Subscription: {
     staffAdded: {
       subscribe: () => pubsub.asyncIterator(["STAFF_ADD"]),
@@ -34,6 +35,18 @@ module.exports = {
     // },
   },
   Query: {
+    // https://graphql.github.io/graphql-js/type/#graphqlobjecttype
+    // type GraphQLResolveInfo = {
+    //   fieldName: string,
+    //   fieldNodes: Array<Field>,
+    //   returnType: GraphQLOutputType,
+    //   parentType: GraphQLCompositeType,
+    //   schema: GraphQLSchema,
+    //   fragments: { [fragmentName: string]: FragmentDefinition },
+    //   rootValue: any,
+    //   operation: OperationDefinition,
+    //   variableValues: { [variableName: string]: any },
+    // }
     // https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature
     findDoctors(parent, args, context, info) {
       const { deptId, hospitalId } = args;
