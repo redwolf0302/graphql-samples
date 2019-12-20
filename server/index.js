@@ -1,11 +1,14 @@
 const http = require("http");
 const { ApolloServer } = require("apollo-server-express");
+const { readFileSync } = require("fs");
 const express = require("express");
 const app = express();
-const typeDefs = require("./schemas/hospital_schema");
+// const typeDefs = require("./schemas/hospital_schema");
 const resolvers = require("./schemas/hospital_resolvers");
 const scalars = require("./scalars");
 const schemaDirectives = require("./directives");
+
+const typeDefs = readFileSync("./schema.graphql", { encoding: "UTF-8" });
 /**
  * server
  * @param {*} port
